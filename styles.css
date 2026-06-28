@@ -1,0 +1,1077 @@
+/* ==========================================
+   Cute Digital Scrapbook CSS Design System
+   ========================================== */
+
+/* Design Tokens & CSS Variables */
+:root {
+    --bg-color: #faf3e0; /* Cozy desk cream */
+    --canvas-color: #fdfbf7; /* Warm white paper */
+    --border-color: #e6dfd3;
+    
+    /* Cute Pastel Palette */
+    --pastel-pink: #ffc8dd;
+    --pastel-pink-dark: #ffafcc;
+    --pastel-blue: #bde0fe;
+    --pastel-blue-dark: #a2d2ff;
+    --pastel-yellow: #fefae0;
+    --pastel-yellow-dark: #f9e2b1;
+    --pastel-green: #e2f0d9;
+    --pastel-green-dark: #c5e1a5;
+    
+    /* Text Colors */
+    --text-main: #5c554a;
+    --text-muted: #8c8273;
+    --text-accent: #d8819d;
+    
+    /* Fonts */
+    --font-hand: 'Caveat', cursive;
+    --font-heading: 'Fredoka', sans-serif;
+    --font-body: 'Quicksand', sans-serif;
+    
+    /* Shadow & Effects */
+    --shadow-soft: 0 10px 30px rgba(92, 85, 74, 0.1);
+    --shadow-polaroid: 0 8px 24px rgba(92, 85, 74, 0.15);
+    --shadow-deep: 0 15px 40px rgba(92, 85, 74, 0.2);
+    --tape-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Reset & Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-main);
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    touch-action: manipulation;
+}
+
+/* Cozy Desk Background Container */
+.desk-container {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.03) 100%),
+                linear-gradient(to right, rgba(92, 85, 74, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(92, 85, 74, 0.02) 1px, transparent 1px);
+    background-size: auto, 24px 24px, 24px 24px;
+    padding: 20px;
+}
+
+/* Sparkles & Floating Particles */
+.sparkles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 1.2rem;
+    animation: floatSparkle 4s ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes floatSparkle {
+    0% {
+        transform: translateY(100px) rotate(0deg) scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Lofi Music Player Widget */
+.music-widget {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    background: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    padding: 12px 18px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: var(--shadow-soft);
+    z-index: 100;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.music-widget:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(92, 85, 74, 0.15);
+}
+
+.music-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--pastel-pink);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.music-btn:hover {
+    background-color: var(--pastel-pink-dark);
+    transform: scale(1.08);
+}
+
+.music-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.music-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.music-status {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.vinyl-disc {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #2b2b2b;
+    border: 3px solid #1a1a1a;
+    position: relative;
+    animation: spin 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.vinyl-center {
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Scrapbook Main Frame */
+.scrapbook-wrapper {
+    width: 95%;
+    max-width: 950px;
+    height: 600px;
+    position: relative;
+    z-index: 10;
+    perspective: 1500px;
+}
+
+/* Hidden Class Helper */
+.hidden {
+    display: none !important;
+}
+
+/* Scrapbook Cover Page Styling */
+.scrapbook-cover {
+    width: 100%;
+    height: 100%;
+    background-color: var(--pastel-pink);
+    border-radius: 18px;
+    box-shadow: var(--shadow-deep);
+    border: 8px solid white;
+    outline: 2px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.5s ease;
+    z-index: 20;
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.4) 8px, transparent 8px),
+        radial-gradient(rgba(255, 255, 255, 0.4) 8px, transparent 8px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+}
+
+.scrapbook-cover.opened {
+    transform: rotateY(-180deg);
+    transform-origin: left center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cover-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 480px;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    border: 2px dashed var(--pastel-pink-dark);
+}
+
+.cover-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.cover-subtitle {
+    font-family: var(--font-hand);
+    font-size: 1.8rem;
+    color: var(--text-accent);
+    margin-bottom: 25px;
+}
+
+.cover-ribbon {
+    width: 100%;
+    height: 8px;
+    background-color: var(--pastel-blue);
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.open-book-btn {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--pastel-pink);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(216, 129, 157, 0.3);
+    transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
+}
+
+.open-book-btn:hover {
+    background-color: var(--pastel-pink-dark);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(216, 129, 157, 0.4);
+}
+
+.open-book-btn i {
+    margin-left: 6px;
+    animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.doodle {
+    position: absolute;
+    font-size: 2.2rem;
+    user-select: none;
+}
+
+.doodle-flower-top {
+    top: -20px;
+    left: -20px;
+    animation: wiggle 3s ease-in-out infinite alternate;
+}
+
+.doodle-star-bottom {
+    bottom: -20px;
+    right: -20px;
+    animation: spinSlow 8s linear infinite;
+}
+
+@keyframes wiggle {
+    from { transform: rotate(-10deg); }
+    to { transform: rotate(10deg); }
+}
+
+@keyframes spinSlow {
+    to { transform: rotate(360deg); }
+}
+
+/* Scrapbook Pages (Dual Layout) */
+.scrapbook-pages {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: white;
+    border-radius: 18px;
+    box-shadow: var(--shadow-deep);
+    border: 8px solid white;
+    outline: 2px solid var(--border-color);
+    position: relative;
+    z-index: 15;
+    animation: pageOpenEffect 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+@keyframes pageOpenEffect {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.scrapbook-page {
+    flex: 1;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pages Styling & Grid Background */
+.page-left {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: var(--canvas-color);
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.page-right {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: var(--canvas-color);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Binder Spine */
+.scrapbook-spine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 30px;
+    height: 100%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, rgba(0,0,0,0.1), rgba(0,0,0,0.01) 30%, rgba(0,0,0,0.01) 70%, rgba(0,0,0,0.1));
+    z-index: 25;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 0;
+    pointer-events: none;
+}
+
+.spine-ring {
+    width: 14px;
+    height: 35px;
+    background: linear-gradient(to bottom, #dcdcdc, #a9a9a9, #dcdcdc);
+    border-radius: 7px;
+    border: 1px solid #808080;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+}
+
+/* Page Header Elements */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 35px;
+}
+
+.page-date {
+    font-family: var(--font-hand);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-muted);
+}
+
+/* Washi Tape Aesthetics */
+.washi-tape-accent {
+    width: 100px;
+    height: 24px;
+    background-color: rgba(255, 200, 221, 0.6);
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.4) 10px, rgba(255,255,255,0.4) 20px);
+    border-left: 3px dashed rgba(0,0,0,0.1);
+    border-right: 3px dashed rgba(0,0,0,0.1);
+    transform: rotate(-3deg);
+    box-shadow: var(--tape-shadow);
+}
+
+.washi-tape-accent.right-tape {
+    background-color: rgba(189, 224, 254, 0.6);
+    transform: rotate(4deg);
+}
+
+.close-book-btn {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.close-book-btn:hover {
+    background-color: var(--pastel-yellow);
+    border-color: var(--pastel-yellow-dark);
+}
+
+/* Journal / Notebook Entry Section */
+.journal-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.journal-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--text-main);
+}
+
+.journal-paper {
+    flex: 1;
+    background-color: #fffdf5;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.03);
+    padding: 15px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.journal-lines {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0) 0%, rgba(92, 85, 74, 0.05) 90%, rgba(92, 85, 74, 0.05) 100%);
+    background-size: 100% 28px;
+    line-height: 28px;
+}
+
+.journal-text {
+    font-family: var(--font-hand);
+    font-size: 1.5rem;
+    color: #4a453e;
+    text-align: left;
+    white-space: pre-line;
+    display: none;
+}
+
+.journal-text.active-entry {
+    display: block;
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.journal-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 40; /* Ensure pagination is on top of envelope flap/card on mobile */
+}
+
+.page-nav-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.page-nav-btn:hover:not(:disabled) {
+    background-color: var(--pastel-pink);
+    color: white;
+    border-color: var(--pastel-pink-dark);
+}
+
+.page-nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.page-indicator {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Cute Interactive Envelope */
+.envelope-section {
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    z-index: 30; /* Ensure envelope sits on top of the binder spine */
+}
+
+.envelope-container {
+    width: 140px;
+    height: 90px;
+    background-color: var(--pastel-pink-dark);
+    position: relative;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.envelope-container:hover {
+    transform: scale(1.08) rotate(-2deg);
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-top: 50px solid var(--pastel-pink);
+    border-bottom: 40px solid transparent;
+    transform-origin: top center;
+    transition: transform 0.4s ease;
+    z-index: 4;
+}
+
+.envelope-container:hover .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope-card {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: 120px;
+    height: 75px;
+    background-color: white;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    z-index: 2;
+    transition: transform 0.4s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.envelope-container:hover .envelope-card {
+    transform: translateY(-30px) rotate(-4deg);
+    z-index: 5;
+}
+
+.letter-preview {
+    font-family: var(--font-hand);
+    font-size: 1.1rem;
+    color: var(--text-accent);
+    font-weight: bold;
+}
+
+.envelope-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 70px solid rgba(255, 255, 255, 0.1);
+    border-right: 70px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 50px solid rgba(255, 255, 255, 0.15);
+    border-top: 40px solid transparent;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Polaroid Memory Frames */
+.polaroid-gallery {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    flex: 1;
+}
+
+.polaroid-frame {
+    background-color: white;
+    padding: 10px 10px 22px 10px;
+    width: 120px;
+    box-shadow: var(--shadow-polaroid);
+    border: 1px solid rgba(0,0,0,0.06);
+    transform: rotate(var(--rotation));
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.polaroid-frame:hover {
+    transform: scale(1.12) rotate(0deg) !important;
+    box-shadow: var(--shadow-deep);
+    z-index: 10;
+}
+
+.tape-piece {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+    width: 55px;
+    height: 18px;
+    background-color: rgba(254, 250, 224, 0.75);
+    border-left: 2px dashed rgba(0,0,0,0.05);
+    border-right: 2px dashed rgba(0,0,0,0.05);
+    box-shadow: var(--tape-shadow);
+}
+
+.tape-piece.green-tape {
+    background-color: rgba(226, 240, 217, 0.75);
+    transform: translateX(-50%) rotate(4deg);
+}
+
+.tape-piece.yellow-tape {
+    background-color: rgba(255, 200, 221, 0.75);
+    transform: translateX(-50%) rotate(-2deg);
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 100px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.95);
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-placeholder i {
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.photo-txt {
+    font-size: 0.75rem;
+    font-family: var(--font-heading);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Background Gradients for placeholders */
+.red-tint { background: linear-gradient(135deg, #ffafcc, #ffc8dd); }
+.blue-tint { background: linear-gradient(135deg, #a2d2ff, #bde0fe); }
+.yellow-tint { background: linear-gradient(135deg, #f9e2b1, #fefae0); }
+
+.polaroid-caption {
+    font-family: var(--font-hand);
+    font-size: 1.15rem;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--text-main);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Drag and Drop Sticker Board & Panel */
+.sticker-panel {
+    background-color: #fffdf5;
+    border: 2px dashed var(--pastel-pink);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 15px;
+}
+
+.sticker-panel-title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.sticker-options {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.sticker-item {
+    font-size: 1.8rem;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sticker-item:hover {
+    transform: scale(1.25) rotate(5deg);
+}
+
+.sticker-item:active {
+    cursor: grabbing;
+}
+
+/* Placed Stickers on the Page */
+.placed-sticker {
+    position: absolute;
+    font-size: 1.8rem;
+    cursor: pointer;
+    user-select: none;
+    z-index: 50;
+    animation: stampEffect 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes stampEffect {
+    from { transform: scale(2) rotate(15deg); opacity: 0; }
+    to { transform: scale(1) rotate(var(--sticker-rot, 0deg)); opacity: 1; }
+}
+
+/* Cute popup letter modal */
+.letter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: rgba(92, 85, 74, 0.4);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    z-index: 200;
+    display: block; /* Use block layout to avoid Safari/iOS flexbox scroll clipping bugs */
+    overflow-y: auto; /* Enable scrollbar on container */
+    padding: 0 15px; /* Horizontal spacing */
+    -webkit-overflow-scrolling: touch;
+}
+
+.letter-paper {
+    background-color: #fffdf5;
+    width: 90%;
+    max-width: 500px;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-deep);
+    border: 3px solid white;
+    outline: 2px solid var(--border-color);
+    position: relative;
+    transform: scale(0.9);
+    animation: popupAnimation 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
+    margin: 40px auto; /* Block margin centers horizontally and provides safe top/bottom scrolling space */
+}
+
+@keyframes popupAnimation {
+    to { transform: scale(1); }
+}
+
+.close-letter-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(92, 85, 74, 0.08);
+    color: var(--text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.close-letter-btn:hover {
+    background-color: var(--pastel-pink);
+    color: white;
+}
+
+.letter-lines {
+    background-image: linear-gradient(rgba(0,0,0,0) 0%, rgba(92, 85, 74, 0.06) 90%, rgba(92, 85, 74, 0.06) 100%);
+    background-size: 100% 32px;
+    line-height: 32px;
+    padding-top: 0; /* Remove top offset to align text with lines */
+}
+
+.letter-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--text-accent);
+    line-height: 32px;
+    margin-bottom: 32px; /* 1 line height gap */
+}
+
+.letter-paragraph {
+    font-family: var(--font-hand);
+    font-size: 1.55rem;
+    color: #4a453e;
+    line-height: 32px;
+    margin-bottom: 32px; /* 1 line height gap */
+    text-indent: 20px;
+}
+
+.letter-signature {
+    font-family: var(--font-hand);
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: right;
+    color: var(--text-accent);
+    line-height: 32px;
+    margin-top: 32px; /* 1 line height gap */
+}
+
+/* Touch Dragging Class */
+.dragging-active {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    pointer-events: none !important;
+    opacity: 0.9;
+    user-select: none;
+    -webkit-user-select: none;
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Placed Stickers Touch Zoom Fix */
+.placed-sticker {
+    position: absolute;
+    font-size: 1.8rem;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    z-index: 50;
+    touch-action: none; /* Prevents scrolling / double-tap zoom when interacting with stickers */
+    animation: stampEffect 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* ==========================================
+   Responsive Styling
+   ========================================== */
+@media (max-width: 850px) {
+    .desk-container {
+        padding: 10px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .music-widget {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 15px;
+        align-self: center;
+        width: max-content;
+    }
+
+    .scrapbook-wrapper {
+        width: 100%;
+        height: auto;
+        min-height: 500px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .scrapbook-pages {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .scrapbook-page {
+        padding: 25px;
+        min-height: 550px; /* Increased to accommodate spacious spacing and prevent clutter */
+    }
+    
+    .page-left {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 10px;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .page-right {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 10px;
+        border-left: none;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .scrapbook-spine {
+        position: relative; /* Change from absolute to relative to sit naturally in document flow */
+        left: 0;
+        top: 0;
+        transform: none; /* Remove vertical centering transform */
+        width: 100%;
+        height: 40px; /* Give it physical height so it pushes pages apart */
+        flex-direction: row;
+        padding: 0 40px;
+        z-index: 10;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.01) 30%, rgba(0,0,0,0.01) 70%, rgba(0,0,0,0.1)); /* Horizontal binder crease */
+    }
+    
+    .spine-ring {
+        width: 35px;
+        height: 14px;
+        background: linear-gradient(to right, #dcdcdc, #a9a9a9, #dcdcdc);
+    }
+    
+    .envelope-section {
+        margin-top: 40px; /* Generous gap below pagination arrows */
+        margin-bottom: 20px; /* Spacing above the binder spine rings */
+    }
+    
+    .journal-pagination {
+        margin-top: 20px; /* Add extra spacing between paper and arrows on mobile */
+    }
+    
+    /* Keep envelope flap and card open by default on mobile/tablet touch devices */
+    .envelope-container .envelope-flap {
+        transform: rotateX(180deg);
+    }
+    .envelope-container .envelope-card {
+        transform: translateY(-30px) rotate(-4deg);
+        z-index: 5;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .cover-title {
+        font-size: 1.8rem;
+    }
+    
+    .cover-subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .cover-content {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .polaroid-gallery {
+        gap: 10px;
+    }
+
+    .polaroid-frame {
+        width: 95px;
+        padding: 6px 6px 14px 6px;
+    }
+
+    .photo-placeholder {
+        height: 80px;
+    }
+
+    .photo-placeholder i {
+        font-size: 1.3rem;
+    }
+
+    .polaroid-caption {
+        font-size: 0.95rem;
+        margin-top: 5px;
+    }
+
+    .journal-text {
+        font-size: 1.2rem;
+    }
+
+    .sticker-item {
+        font-size: 1.5rem;
+    }
+
+    /* Envelope card & text adjustments */
+    .envelope-card {
+        padding: 6px;
+    }
+    
+    .letter-preview {
+        font-size: 0.9rem;
+        line-height: 1.2;
+    }
+
+    /* Letter modal & text adjustments */
+    .letter-paper {
+        margin: 20px auto;
+        padding: 30px 20px;
+    }
+    
+    .letter-paragraph {
+        font-size: 1.3rem;
+        line-height: 32px; /* Maintain 32px line grid on mobile */
+        margin-bottom: 32px; /* Maintain 32px line gap on mobile */
+        text-indent: 15px;
+    }
+    
+    .letter-title {
+        font-size: 1.4rem;
+        line-height: 32px; /* Maintain 32px line grid on mobile */
+        margin-bottom: 32px; /* Maintain 32px line gap on mobile */
+    }
+    
+    .letter-signature {
+        font-size: 1.4rem;
+        line-height: 32px; /* Maintain 32px line grid on mobile */
+        margin-top: 32px; /* Maintain 32px line gap on mobile */
+    }
+}

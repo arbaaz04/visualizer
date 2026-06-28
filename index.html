@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+  IBA Karachi - Department of Computer Science
+  Course: CSE-302 (Computer Architecture and Assembly Language)
+  Submitted to: Dr. Salman Zaffar
+  Lab Assignment 4: Cache Memory Mapping & Pipeline Simulator
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Digital Scrapbook</title>
+    <!-- Google Fonts for Cute Handwriting and Rounded UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fredoka:wght@300..700&family=Quicksand:wght@400..700&display=swap"
+        rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="styles.css?v=4">
+    <!-- FontAwesome for Cute Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Sound Effects / Background Music -->
+    <audio id="bg-music" loop>
+        <source src="https://archive.org/download/jamendo-518220/01-2025616-UrbanGodzilla-Chillout%20LoFi%20Hip-Hop.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="pop-sound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav" type="audio/wav">
+    </audio>
+    <audio id="paper-sound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/1470/1470-84.wav" type="audio/wav">
+    </audio>
+
+    <!-- Visual Background: Desk Scene -->
+    <div class="desk-container">
+        <!-- Floating Ambient Sparkles/Leaves -->
+        <div class="sparkles-container" id="sparkles"></div>
+
+        <!-- Cozy Music Control Widget -->
+        <div class="music-widget" id="music-widget">
+            <button class="music-btn" id="music-toggle-btn" aria-label="Toggle Music">
+                <i class="fa-solid fa-music"></i>
+            </button>
+            <div class="music-info">
+                <span class="music-title" id="music-title">Lorem Beats</span>
+                <span class="music-status">Paused</span>
+            </div>
+            <div class="vinyl-disc" id="music-vinyl">
+                <div class="vinyl-center"></div>
+            </div>
+        </div>
+
+        <!-- Main Scrapbook Container -->
+        <div class="scrapbook-wrapper">
+            <!-- Scrapbook Cover -->
+            <div class="scrapbook-cover" id="scrapbook-cover">
+                <div class="cover-content">
+                    <div class="doodle doodle-flower-top">🌸</div>
+                    <h1 class="cover-title" id="cover-title">Lorem Ipsum</h1>
+                    <p class="cover-subtitle" id="cover-subtitle">Dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="cover-ribbon"></div>
+                    <button class="open-book-btn" id="open-book-btn">
+                        <span id="open-btn-text">Open me</span> <i></i>
+                    </button>
+                    <div class="doodle doodle-star-bottom">⭐️</div>
+                </div>
+            </div>
+
+            <!-- Scrapbook Pages (Initially Closed/Hidden) -->
+            <div class="scrapbook-pages hidden" id="scrapbook-pages">
+                <!-- Left Page -->
+                <div class="scrapbook-page page-left">
+                    <div class="page-header">
+                        <span class="page-date" id="page-date">January 2000</span>
+                        <div class="washi-tape-accent"></div>
+                    </div>
+
+                    <!-- Diary/Journal Entry Component -->
+                    <div class="journal-container">
+                        <h2 class="journal-title" id="journal-title">Lorem Message</h2>
+                        <div class="journal-paper">
+                            <div class="journal-lines">
+                                <p class="journal-text active-entry" id="entry-text">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="journal-pagination">
+                            <button class="page-nav-btn" id="prev-entry-btn" disabled><i
+                                    class="fa-solid fa-chevron-left"></i></button>
+                            <span class="page-indicator" id="entry-page-num">Page 1 / 3</span>
+                            <button class="page-nav-btn" id="next-entry-btn"><i
+                                    class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Envelope Letter Section -->
+                    <div class="envelope-section">
+                        <div class="envelope-container" id="envelope">
+                            <div class="envelope-flap"></div>
+                            <div class="envelope-card">
+                                <span class="letter-preview">Click to read... 💌</span>
+                            </div>
+                            <div class="envelope-body"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spine / Ring Binder Middle -->
+                <div class="scrapbook-spine">
+                    <div class="spine-ring"></div>
+                    <div class="spine-ring"></div>
+                    <div class="spine-ring"></div>
+                    <div class="spine-ring"></div>
+                    <div class="spine-ring"></div>
+                </div>
+
+                <!-- Right Page -->
+                <div class="scrapbook-page page-right">
+                    <div class="page-header">
+                        <div class="washi-tape-accent right-tape"></div>
+                        <button class="close-book-btn" id="close-book-btn" title="Close Scrapbook">
+                            <i class="fa-solid fa-door-open"></i> Close
+                        </button>
+                    </div>
+
+                    <!-- Polaroid Gallery -->
+                    <div class="polaroid-gallery">
+                        <!-- Polaroid 1 -->
+                        <div class="polaroid-frame" style="--rotation: -4deg;">
+                            <div class="tape-piece"></div>
+                            <div class="photo-placeholder red-tint">
+                                <svg class="polaroid-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+                                    style="width: 85%; height: 85%;">
+                                    <path d="M 50,25 C 20,5 25,60 50,75 C 75,60 80,5 50,25 Z" fill="none" stroke="#fff"
+                                        stroke-width="4" stroke-linecap="round" />
+                                    <path d="M 50,25 C 20,5 25,60 50,75 C 75,60 80,5 50,25 Z" fill="none"
+                                        stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                                    <rect x="35" y="42" width="30" height="12" rx="4" fill="#fca5a5"
+                                        transform="rotate(-15, 50, 48)" />
+                                    <rect x="45" y="42" width="10" height="12" fill="#fff" opacity="0.6"
+                                        transform="rotate(-15, 50, 48)" />
+                                    <circle cx="48" cy="46" r="1.2" fill="#fff" />
+                                    <circle cx="52" cy="45" r="1.2" fill="#fff" />
+                                    <path d="M22,25 L24,28 L27,29 L24,30 L22,33 L20,30 L17,29 L20,28 Z" fill="#fff" />
+                                    <path d="M78,65 L80,68 L83,69 L80,70 L78,73 L76,70 L73,69 L76,68 Z" fill="#fff" />
+                                </svg>
+                            </div>
+                            <p class="polaroid-caption" id="polaroid-1-caption">Lorem 1</p>
+                        </div>
+
+                        <!-- Polaroid 2 -->
+                        <div class="polaroid-frame" style="--rotation: 3deg;">
+                            <div class="tape-piece green-tape"></div>
+                            <div class="photo-placeholder blue-tint">
+                                <svg class="polaroid-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+                                    style="width: 85%; height: 85%;">
+                                    <rect x="25" y="45" width="40" height="25" rx="2" fill="#60a5fa" stroke="#fff"
+                                        stroke-width="2" />
+                                    <path d="M 45,50 L 45,65 M 37.5,57.5 L 52.5,57.5" stroke="#fff" stroke-width="3"
+                                        stroke-linecap="round" />
+                                    <path d="M 58,40 L 74,40 L 74,52 C 74,58 68,58 58,58 Z" fill="#fbbf24" stroke="#fff"
+                                        stroke-width="2" />
+                                    <path d="M 74,43 C 80,43 80,49 74,49" fill="none" stroke="#fff"
+                                        stroke-width="2.5" />
+                                    <path d="M 62,34 Q 64,30 62,26" fill="none" stroke="#fff" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                    <path d="M 68,34 Q 70,30 68,26" fill="none" stroke="#fff" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                    <circle cx="30" cy="22" r="3" fill="#fbbf24" />
+                                    <circle cx="27" cy="19" r="2.5" fill="#fff" />
+                                    <circle cx="33" cy="19" r="2.5" fill="#fff" />
+                                    <circle cx="33" cy="25" r="2.5" fill="#fff" />
+                                    <circle cx="27" cy="25" r="2.5" fill="#fff" />
+                                </svg>
+                            </div>
+                            <p class="polaroid-caption" id="polaroid-2-caption">Lorem 2</p>
+                        </div>
+
+                        <!-- Polaroid 3 -->
+                        <div class="polaroid-frame" style="--rotation: -2deg;">
+                            <div class="tape-piece yellow-tape"></div>
+                            <div class="photo-placeholder yellow-tint">
+                                <svg class="polaroid-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+                                    style="width: 85%; height: 85%;">
+                                    <circle cx="30" cy="30" r="1.5" fill="#fff" />
+                                    <circle cx="75" cy="25" r="1" fill="#fff" />
+                                    <circle cx="25" cy="70" r="1" fill="#fff" />
+                                    <path
+                                        d="M 65,22 C 55,22 48,30 48,40 C 48,52 58,60 70,60 C 73,60 76,58 78,56 C 71,56 65,49 65,40 C 65,32 70,25 76,24 C 73,22 69,22 65,22 Z"
+                                        fill="#fbbf24" opacity="0.9" />
+                                    <rect x="15" y="32" width="32" height="15" rx="6" fill="#fff" opacity="0.95" />
+                                    <polygon points="22,47 22,52 27,47" fill="#fff" opacity="0.95" />
+                                    <text x="20" y="42" font-family="Fredoka" font-size="8" fill="#d8819d"
+                                        font-weight="bold" id="polaroid-3-text-1">Lorem</text>
+
+                                    <rect x="35" y="53" width="34" height="15" rx="6" fill="#fff" opacity="0.95" />
+                                    <polygon points="58,68 58,73 53,68" fill="#fff" opacity="0.95" />
+                                    <text x="39" y="63" font-family="Fredoka" font-size="7.5" fill="#d8819d"
+                                        font-weight="bold" id="polaroid-3-text-2">Ipsum</text>
+                                </svg>
+                            </div>
+                            <p class="polaroid-caption" id="polaroid-3-caption">Lorem 3</p>
+                        </div>
+                    </div>
+
+                    <!-- Custom Sticker Panel & Drop Area -->
+                    <div class="sticker-panel">
+                        <h3 class="sticker-panel-title" id="sticker-panel-title">Add Some Stickers!</h3>
+                        <div class="sticker-options">
+                            <div class="sticker-item" draggable="true" data-emoji="💖" data-sound="pop">💖</div>
+                            <div class="sticker-item" draggable="true" data-emoji="🌸" data-sound="pop">🌸</div>
+                            <div class="sticker-item" draggable="true" data-emoji="⭐️" data-sound="pop">⭐️</div>
+                            <div class="sticker-item" draggable="true" data-emoji="🐱" data-sound="pop">🐱</div>
+                            <div class="sticker-item" draggable="true" data-emoji="🍦" data-sound="pop">🍦</div>
+                            <div class="sticker-item" draggable="true" data-emoji="🎨" data-sound="pop">🎨</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Pop-up Letter Modal -->
+    <div class="letter-modal hidden" id="letter-modal">
+        <div class="letter-paper">
+            <button class="close-letter-btn" id="close-letter-btn">&times;</button>
+            <div class="letter-lines">
+                <h2 class="letter-title" id="letter-title">Dear Lorem,</h2>
+                <p class="letter-paragraph">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <p class="letter-paragraph">
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <p class="letter-paragraph">
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+                <p class="letter-signature">Lorem!!!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configuration -->
+    <script src="config.js"></script>
+    <!-- Main JavaScript Logic -->
+    <script src="app.js"></script>
+</body>
+
+</html>
