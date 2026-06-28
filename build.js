@@ -60,6 +60,22 @@ const config = {
     STICKER_PANEL_TITLE: process.env.STICKER_PANEL_TITLE || "Add Some Stickers!"
 };
 
+// Helper to recursively unescape newlines in strings and arrays
+function unescapeNewlines(val) {
+    if (typeof val === 'string') {
+        return val.replace(/\\n/g, '\n');
+    }
+    if (Array.isArray(val)) {
+        return val.map(unescapeNewlines);
+    }
+    return val;
+}
+
+// Apply unescaping to all config values
+for (const key in config) {
+    config[key] = unescapeNewlines(config[key]);
+}
+
 // Write config.js
 const fileContent = `// Auto-generated configuration file. Do not edit directly.\nwindow.CONFIG = ${JSON.stringify(config, null, 2)};\n`;
 fs.writeFileSync(path.resolve('config.js'), fileContent, 'utf8');
