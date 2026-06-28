@@ -1,0 +1,57 @@
+name: Deploy Scrapbook to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+    environment: main
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build custom config.js from env vars
+        run: npm run build
+        env:
+          TITLE: ${{ vars.TITLE || secrets.TITLE }}
+          SUBTITLE: ${{ vars.SUBTITLE || secrets.SUBTITLE }}
+          OPEN_BTN_TEXT: ${{ vars.OPEN_BTN_TEXT || secrets.OPEN_BTN_TEXT }}
+          PAGE_DATE: ${{ vars.PAGE_DATE || secrets.PAGE_DATE }}
+          JOURNAL_TITLE: ${{ vars.JOURNAL_TITLE || secrets.JOURNAL_TITLE }}
+          JOURNAL_ENTRY_1: ${{ vars.JOURNAL_ENTRY_1 || secrets.JOURNAL_ENTRY_1 }}
+          JOURNAL_ENTRY_2: ${{ vars.JOURNAL_ENTRY_2 || secrets.JOURNAL_ENTRY_2 }}
+          JOURNAL_ENTRY_3: ${{ vars.JOURNAL_ENTRY_3 || secrets.JOURNAL_ENTRY_3 }}
+          POLAROID_1_CAPTION: ${{ vars.POLAROID_1_CAPTION || secrets.POLAROID_1_CAPTION }}
+          POLAROID_2_CAPTION: ${{ vars.POLAROID_2_CAPTION || secrets.POLAROID_2_CAPTION }}
+          POLAROID_3_CAPTION: ${{ vars.POLAROID_3_CAPTION || secrets.POLAROID_3_CAPTION }}
+          POLAROID_3_TEXT_1: ${{ vars.POLAROID_3_TEXT_1 || secrets.POLAROID_3_TEXT_1 }}
+          POLAROID_3_TEXT_2: ${{ vars.POLAROID_3_TEXT_2 || secrets.POLAROID_3_TEXT_2 }}
+          LETTER_TITLE: ${{ vars.LETTER_TITLE || secrets.LETTER_TITLE }}
+          LETTER_PARAGRAPH_1: ${{ vars.LETTER_PARAGRAPH_1 || secrets.LETTER_PARAGRAPH_1 }}
+          LETTER_PARAGRAPH_2: ${{ vars.LETTER_PARAGRAPH_2 || secrets.LETTER_PARAGRAPH_2 }}
+          LETTER_PARAGRAPH_3: ${{ vars.LETTER_PARAGRAPH_3 || secrets.LETTER_PARAGRAPH_3 }}
+          LETTER_SIGNATURE: ${{ vars.LETTER_SIGNATURE || secrets.LETTER_SIGNATURE }}
+          MUSIC_TITLE: ${{ vars.MUSIC_TITLE || secrets.MUSIC_TITLE }}
+          STICKER_PANEL_TITLE: ${{ vars.STICKER_PANEL_TITLE || secrets.STICKER_PANEL_TITLE }}
+
+      - name: Remove gitignore to include config.js in deployment
+        run: rm -f .gitignore
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: . # deploy current folder contents
+          branch: gh-pages # deploy to gh-pages branch
