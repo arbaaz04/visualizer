@@ -1,27 +1,27 @@
 // Auto-generated configuration file. Do not edit directly.
 window.CONFIG = {
-  "TITLE": "A digital scrapbook",
-  "SUBTITLE": "A little break from the hospital wards 🌸",
-  "OPEN_BTN_TEXT": "Open me 👀",
-  "PAGE_DATE": "June 2026",
-  "JOURNAL_TITLE": "A Little Message... 📝",
+  "TITLE": "QSBkaWdpdGFsIHNjcmFwYm9vaw==",
+  "SUBTITLE": "QSBsaXR0bGUgYnJlYWsgZnJvbSB0aGUgaG9zcGl0YWwgd2FyZHMg8J+MuA==",
+  "OPEN_BTN_TEXT": "T3BlbiBtZSDwn5GA",
+  "PAGE_DATE": "SnVuZSAyMDI2",
+  "JOURNAL_TITLE": "QSBMaXR0bGUgTWVzc2FnZS4uLiDwn5Od",
   "JOURNAL_ENTRIES": [
-    "Hey Hira! 🌸\n\nI built this small space to give you a quick break from the hospital wards and books. You work so incredibly hard in med school. Here is a cozy corner to make you smile whenever your clinical routines get chaotic!",
-    "From crying about upcoming tests and unobs to completely acing them, you do it all! I'm so proud of your dedication (and our combined ability to run away from hospital rounds). You're going to make an amazing doctor! 🩺✨",
-    "Thanks for being the best late-night ranter. Take a moment to play some lofi beats, slide some stickers around, and ignore the study stress for a bit. You've got this! 🐱"
+    "SGV5IEhpcmEhIPCfjLgKCkkgYnVpbHQgdGhpcyBzbWFsbCBzcGFjZSB0byBnaXZlIHlvdSBhIHF1aWNrIGJyZWFrIGZyb20gdGhlIGhvc3BpdGFsIHdhcmRzIGFuZCBib29rcy4gWW91IHdvcmsgc28gaW5jcmVkaWJseSBoYXJkIGluIG1lZCBzY2hvb2wuIEhlcmUgaXMgYSBjb3p5IGNvcm5lciB0byBtYWtlIHlvdSBzbWlsZSB3aGVuZXZlciB5b3VyIGNsaW5pY2FsIHJvdXRpbmVzIGdldCBjaGFvdGljIQ==",
+    "RnJvbSBjcnlpbmcgYWJvdXQgdXBjb21pbmcgdGVzdHMgYW5kIHVub2JzIHRvIGNvbXBsZXRlbHkgYWNpbmcgdGhlbSwgeW91IGRvIGl0IGFsbCEgSSdtIHNvIHByb3VkIG9mIHlvdXIgZGVkaWNhdGlvbiAoYW5kIG91ciBjb21iaW5lZCBhYmlsaXR5IHRvIHJ1biBhd2F5IGZyb20gaG9zcGl0YWwgcm91bmRzKS4gWW91J3JlIGdvaW5nIHRvIG1ha2UgYW4gYW1hemluZyBkb2N0b3IhIPCfqbrinKg=",
+    "VGhhbmtzIGZvciBiZWluZyB0aGUgYmVzdCBsYXRlLW5pZ2h0IHJhbnRlci4gVGFrZSBhIG1vbWVudCB0byBwbGF5IHNvbWUgbG9maSBiZWF0cywgc2xpZGUgc29tZSBzdGlja2VycyBhcm91bmQsIGFuZCBpZ25vcmUgdGhlIHN0dWR5IHN0cmVzcyBmb3IgYSBiaXQuIFlvdSd2ZSBnb3QgdGhpcyEg8J+QsQ=="
   ],
-  "POLAROID_1_CAPTION": "Wards Escapee 🩺🏃‍♀️",
-  "POLAROID_2_CAPTION": "Unobs & Coffee 📖☕️",
-  "POLAROID_3_CAPTION": "2 AM Chaotic Talks 🌙💬",
-  "POLAROID_3_TEXT_1": "Ahhh!",
-  "POLAROID_3_TEXT_2": "Same lol",
-  "LETTER_TITLE": "Dear Hira, 🩺💝",
+  "POLAROID_1_CAPTION": "V2FyZHMgRXNjYXBlZSDwn6m68J+Pg+KAjeKZgO+4jw==",
+  "POLAROID_2_CAPTION": "VW5vYnMgJiBDb2ZmZWUg8J+TluKYle+4jw==",
+  "POLAROID_3_CAPTION": "MiBBTSBDaGFvdGljIFRhbGtzIPCfjJnwn5Ks",
+  "POLAROID_3_TEXT_1": "QWhoaCE=",
+  "POLAROID_3_TEXT_2": "U2FtZSBsb2w=",
+  "LETTER_TITLE": "RGVhciBIaXJhLCDwn6m68J+SnQ==",
   "LETTER_PARAGRAPHS": [
-    "I know clinical rotations, long ward hours, and stressful exams can be completely draining.",
-    "Yet, you handle it all with so much humor, strength, and grace. Thank you for always being down to text late at night, having random mood swings, and sharing the daily chaos. You're an incredible friend!",
-    "Remember to take a break, get some sleep (seriously!), and know that I'm always cheering you on. You're going to make an amazing doctor! 🌟"
+    "SSBrbm93IGNsaW5pY2FsIHJvdGF0aW9ucywgbG9uZyB3YXJkIGhvdXJzLCBhbmQgc3RyZXNzZnVsIGV4YW1zIGNhbiBiZSBjb21wbGV0ZWx5IGRyYWluaW5nLg==",
+    "WWV0LCB5b3UgaGFuZGxlIGl0IGFsbCB3aXRoIHNvIG11Y2ggaHVtb3IsIHN0cmVuZ3RoLCBhbmQgZ3JhY2UuIFRoYW5rIHlvdSBmb3IgYWx3YXlzIGJlaW5nIGRvd24gdG8gdGV4dCBsYXRlIGF0IG5pZ2h0LCBoYXZpbmcgcmFuZG9tIG1vb2Qgc3dpbmdzLCBhbmQgc2hhcmluZyB0aGUgZGFpbHkgY2hhb3MuIFlvdSdyZSBhbiBpbmNyZWRpYmxlIGZyaWVuZCE=",
+    "UmVtZW1iZXIgdG8gdGFrZSBhIGJyZWFrLCBnZXQgc29tZSBzbGVlcCAoc2VyaW91c2x5ISksIGFuZCBrbm93IHRoYXQgSSdtIGFsd2F5cyBjaGVlcmluZyB5b3Ugb24uIFlvdSdyZSBnb2luZyB0byBtYWtlIGFuIGFtYXppbmcgZG9jdG9yISDwn4yf"
   ],
-  "LETTER_SIGNATURE": "Byeee!!!🥰",
-  "MUSIC_TITLE": "Cozy Beats",
-  "STICKER_PANEL_TITLE": "Add Some Cute Stickers! 👇 (Drag or Tap)"
+  "LETTER_SIGNATURE": "QnllZWUhISHwn6Ww",
+  "MUSIC_TITLE": "Q296eSBCZWF0cw==",
+  "STICKER_PANEL_TITLE": "QWRkIFNvbWUgQ3V0ZSBTdGlja2VycyEg8J+RhyAoRHJhZyBvciBUYXAp"
 };

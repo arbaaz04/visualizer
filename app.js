@@ -38,6 +38,33 @@ document.addEventListener("DOMContentLoaded", () => {
     popSound.volume = 0.4;
     paperSound.volume = 0.5;
 
+    // Helper to decode Base64 strings including UTF-8 emojis/characters
+    function decodeText(base64Str) {
+        try {
+            const binString = atob(base64Str);
+            const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
+            return new TextDecoder().decode(bytes);
+        } catch (e) {
+            return base64Str;
+        }
+    }
+
+    function deobfuscate(val) {
+        if (typeof val === 'string') {
+            return decodeText(val);
+        }
+        if (Array.isArray(val)) {
+            return val.map(deobfuscate);
+        }
+        return val;
+    }
+
+    if (window.CONFIG) {
+        for (const key in window.CONFIG) {
+            window.CONFIG[key] = deobfuscate(window.CONFIG[key]);
+        }
+    }
+
     // Load config from window.CONFIG (loaded from config.js)
     // with local defaults fallback
     const config = window.CONFIG || {

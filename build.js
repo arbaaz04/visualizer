@@ -76,6 +76,22 @@ for (const key in config) {
     config[key] = unescapeNewlines(config[key]);
 }
 
+// Helper to recursively obfuscate strings to Base64
+function obfuscate(val) {
+    if (typeof val === 'string') {
+        return Buffer.from(val, 'utf8').toString('base64');
+    }
+    if (Array.isArray(val)) {
+        return val.map(obfuscate);
+    }
+    return val;
+}
+
+// Obfuscate all values to Base64 for privacy in public Git history
+for (const key in config) {
+    config[key] = obfuscate(config[key]);
+}
+
 // Write config.js
 const fileContent = `// Auto-generated configuration file. Do not edit directly.\nwindow.CONFIG = ${JSON.stringify(config, null, 2)};\n`;
 fs.writeFileSync(path.resolve('config.js'), fileContent, 'utf8');
